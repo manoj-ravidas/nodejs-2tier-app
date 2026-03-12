@@ -1,0 +1,27 @@
+name: NodeJS DockerCI
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    
+    - name: Checkout Code
+      uses: action/checkout@v3
+
+    - name: Docker set up 
+      uses: docker/setup-buildx-action@v2 
+
+    - name: Build Docker image
+      uses: docker build -t nodejs-2tier-app .
+
+    - name: Run docker compose 
+
+      run: |
+
+        docker compose up -d 
